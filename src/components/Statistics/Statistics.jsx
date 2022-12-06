@@ -1,32 +1,24 @@
-import PropTypes from 'prop-types';
-import s from './Statistics.module.css';
+import s from "./Statistics.module.css";
+import PropTypes from "prop-types";
 
-const colors = ['#984ED0', '#CDD25A', '#FDB05E', '#0475ED', '#F02C6E'];
-
-export const Statistics = ({ title, stats }) => {
+const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
   return (
-    <section className={s.statistics}>
-      {title && <h2 className={s.title}>{title}</h2>}
-
-      <ul className={s.list}>
-        {stats.map(({ id, label, percentage }, index) => (
-          <li className={s.item} key={id} style={{ background: colors[index] }}>
-            <span className={s.label}>{label}</span>
-            <span className={s.percentage}>{percentage}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <ul className={s.list}>
+      <li className={s.item}>Good: {good}</li>
+      <li className={s.item}>Neutral: {neutral}</li>
+      <li className={s.item}>Bad: {bad}</li>
+      <li className={s.item}>Total: {total}</li>
+      <li className={s.item}>Positive feedback: {positivePercentage}%</li>
+    </ul>
   );
 };
 
 Statistics.propTypes = {
-  title: PropTypes.string,
-  stats: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      percentage: PropTypes.number.isRequired,
-    }).isRequired
-  ).isRequired,
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
 };
+
+export default Statistics;
